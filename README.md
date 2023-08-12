@@ -7,7 +7,7 @@
 * [Embed File ke String](#embed-file-ke-string)
 * [Embed File ke Byte[]](#embed-file-ke-byte)
 * [Embed Multiple Files](#embed-multiple-files)
-* [Patch Matcher](#patch-matcher)
+* [Path Matcher](#path-matcher)
 * [Hasil Embed di Compile](#hasil-embed-di-compile)
 _____________________
 ## Pengenalan Golang Embed
@@ -84,13 +84,30 @@ func TestMultipleFiles(t *testing.T) {
 }
 ```
 
-## Patch Matcher
+## Path Matcher
 * Selain manual satu per satu, kita bisa mengguakan patch matcher untuk membaca multiple file yang kita inginkan
 * Ini sangat cocok ketika misal kita punya pola jenis file yang kita inginkan untuk kita baca
 * Caranya, kita perlu menggunakan path matcher seperti pada package function path.Match
 
 Package Golang Match : https://golang.org/pkg/path/#Match
 
+Match reports whether name matches the shell pattern. The pattern syntax is:
+```go
+pattern:
+	{ term }
+term:
+	'*'         matches any sequence of non-/ characters
+	'?'         matches any single non-/ character
+	'[' [ '^' ] { character-range } ']'
+	            character class (must be non-empty)
+	c           matches character c (c != '*', '?', '\\', '[')
+	'\\' c      matches character c
+
+character-range:
+	c           matches character c (c != '\\', '-', ']')
+	'\\' c      matches character c
+	lo '-' hi   matches character c for lo <= c <= hi
+```
 ```go
 //go:embed files/*.txt
 var path embed.FS
