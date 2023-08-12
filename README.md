@@ -52,7 +52,7 @@ func TestString(t *testing.T)  {
 var logo []byte
 
 func TestName(t *testing.T) {
-	err := ioutil.WriteFile("logo_next.png", logo, fs.ModePerm)
+	err := os.WriteFile("logo_new.png", logo, fs.ModePerm)
     if err != nil {
 		panic(err)
     }
